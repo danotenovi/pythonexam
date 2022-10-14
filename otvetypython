@@ -183,6 +183,34 @@ def main(text_str):
         _dict[key] = _list
 
     return _dict
+-----------------------------------------------------------replace
+text = """<block><block> declare q(oninti_313) :=[ 'veus_80' , 'teesin', 'dira_86' ]</block>,<block>declare q(endi):= [ 'enxe', 'quma', 'leveri' ,'cema' ] </block>, <block>declare q(quti_20):= [
+'xearza_619', 'tezate_652'] </block>, <block> declare q(zatibi_858) :=
+[ 'arza' , 'aris' ] </block>, </block>"""
+def main(text_str):
+    text_list = text_str.split('</block>,')
+    text_list.pop(len(text_list)-1)
+
+    _dict = {}
+    for text in text_list:
+        key = text[text.find('q(')+2:text.find(')')]
+        key = key.strip()
+
+        value = text[text.find('[')+1:text.find(']')]
+        value_list = value.split(',')
+
+        _list = []
+        for v in value_list:
+            v = v.replace("'", "")
+            v = v.strip()
+            _list.append(v)
+
+        _dict[key] = _list
+
+    return _dict
+
+
+print(main(text))
 -9 задание-
     
 from enum import Enum
